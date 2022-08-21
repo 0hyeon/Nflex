@@ -102,9 +102,9 @@ function Tv() {
               {/* <span id="vote">★ {bannerData?.vote_average}</span> */}
             </BannerTitle>
             <BannerOverview>{bannerData?.overview}</BannerOverview>
-            <BannerBtn onClick={() => moveBanner(bannerData?.id + "")}>
+            {/* <BannerBtn onClick={() => moveBanner(bannerData?.id + "")}>
               자세히 보기
-            </BannerBtn>
+            </BannerBtn> */}
           </Banner>
           <TvSlider kind="popular" data={popularData} />
           <TvSlider kind="ontheair" data={onairData} />

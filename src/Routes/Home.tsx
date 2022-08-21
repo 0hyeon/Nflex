@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 // `;
 
 const Banner = styled.div<{ bgPhoto: string }>`
-  height: 100vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
