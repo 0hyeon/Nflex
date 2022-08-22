@@ -30,12 +30,12 @@ const Banner = styled.div<{ posterPath: string }>`
   background-repeat: no-repeat;
 `;
 const BannerTitle = styled.h2`
-  font-size: 68px;
+  font-size: 48px;
   margin-bottom: 20px; ;
 `;
 
 const BannerOverview = styled.p`
-  font-size: 30px;
+  font-size: 20px;
   width: 50%;
 `;
 const BannerBtn = styled.div`
@@ -83,7 +83,7 @@ function Tv() {
   const moveBanner = (id: string) => {
     history.push(`/tv/${id}`);
   };
-
+  console.log(bannerData);
   // 불필요한 API 호출을 막음
   useEffect(() => {}, []);
 
@@ -102,9 +102,9 @@ function Tv() {
               {/* <span id="vote">★ {bannerData?.vote_average}</span> */}
             </BannerTitle>
             <BannerOverview>{bannerData?.overview}</BannerOverview>
-            {/* <BannerBtn onClick={() => moveBanner(bannerData?.id + "")}>
+            <BannerBtn onClick={() => moveBanner(bannerData?.id + "")}>
               자세히 보기
-            </BannerBtn> */}
+            </BannerBtn>
           </Banner>
           <TvSlider kind="popular" data={popularData} />
           <TvSlider kind="ontheair" data={onairData} />

@@ -38,12 +38,12 @@ const Banner = styled.div<{ bgPhoto: string }>`
 `;
 
 const Title = styled.h2`
-  font-size: 68px;
+  font-size: 48px;
   margin-bottom: 20px; ;
 `;
 
 const Overview = styled.p`
-  font-size: 30px;
+  font-size: 20px;
   width: 50%;
 `;
 
@@ -168,13 +168,31 @@ const BigOverview = styled.p`
   top: -80px;
   color: ${(props) => props.theme.white.lighter};
 `;
+const BannerBtn = styled.div`
+  font-family: "Do Hyeon";
+  font-weight: 800;
+  font-size: 18px;
+  width: 150px;
+  text-align: center;
+  color: black;
+  background-color: ${(props) => props.theme.white.lighter};
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  &:hover {
+    background-color: black;
+    color: ${(props) => props.theme.white.lighter};
+  }
+`;
 const offset = 6;
 
 function Home() {
   const history = useHistory();
   const { scrollY } = useViewportScroll();
   const bigMovieMatch = useRouteMatch<{ movieId: string }>("/movies/:movieId"); //해당 url인지 아닌지판단
-  console.log(bigMovieMatch);
 
   //데이터api 받아오기
 
@@ -198,7 +216,7 @@ function Home() {
   // const { data: videoData, isLoading: videoLoading } =
   //   useQuery<IGetVideosResult>(["movies", "videos"], () => getVideo(616037));
   // console.log(videoData);
-
+  console.log(nowData);
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
 
@@ -216,6 +234,9 @@ function Home() {
 
   const onBoxClicked = (movieId: number) => {
     history.push(`/movies/${movieId}`);
+  };
+  const moveBanner = (id: string) => {
+    history.push(`/movie/${id}`);
   };
   const onOverlayClick = () => history.push("/");
   const clickedMovie =
@@ -244,10 +265,13 @@ function Home() {
 
           <Banner
             onClick={incraseIndex}
-            bgPhoto={makeImagePath(nowData?.results[0].poster_path || "")}
+            bgPhoto={makeImagePath(nowData?.results[0].backdrop_path || "")}
           >
             <Title>{nowData?.results[0].title}</Title>
             <Overview>{nowData?.results[0].overview}</Overview>
+            <BannerBtn onClick={() => moveBanner(nowData?.results[0].id + "")}>
+              자세히 보기
+            </BannerBtn>
           </Banner>
           <MovieSlider kind="upcoming" data={upData} />
           <MovieSlider kind="now" data={nowData} />

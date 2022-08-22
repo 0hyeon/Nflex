@@ -23,8 +23,8 @@ const SliderRow = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 5px;
-  padding: 0 5px;
   width: 100%;
+  padding: 0 5px;
 `;
 const Box = styled(motion.div)<{ posterpath: string }>`
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent),
@@ -40,13 +40,14 @@ const Box = styled(motion.div)<{ posterpath: string }>`
   font-size: 18px;
   font-weight: 800;
   text-align: center;
-  color: ${(props) => props.theme.white.lighter};
+  color: ${(props) => props.theme.black.lighter};
   border-radius: 12px;
   cursor: pointer;
   text-shadow: 2px 2px 2px black;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   #title {
     padding: 0 40px;
+    color: white;
   }
   &:first-child {
     margin-left: 5px;
@@ -64,7 +65,7 @@ const BoxBottom = styled(motion.div)`
   flex-direction: column;
   width: 100%;
   padding: 10px;
-  background-color: ${(props) => props.theme.black.darker};
+  background-color: ${(props) => props.theme.black.lighter};
   opacity: 0;
   span {
     text-align: center;
@@ -77,7 +78,7 @@ const BoxBottom = styled(motion.div)`
   #vote {
     font-weight: 800;
     font-size: 16px;
-    color: ${(props) => props.theme.white.lighter};
+    color: ${(props) => props.theme.red};
   }
 `;
 const PrevIcon = styled(motion.img)`

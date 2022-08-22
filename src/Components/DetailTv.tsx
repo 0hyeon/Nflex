@@ -9,16 +9,16 @@ import { getPosterPath } from "../utils";
 import Loader from "./Loader";
 
 const Modal = styled(motion.div)`
+  z-index: 99;
   position: absolute;
-  width: 55vw;
-  height: 80vh;
+  width: 40vw;
   top: 15%;
   left: 0;
   right: 0;
   margin: 0 auto;
-  color: ${(props) => props.theme.white.lighter};
-  border-radius: 12px;
-  background-color: ${(props) => props.theme.white.lighter};
+  color: ${(props) => props.theme.black.darker};
+  border-radius: 13px;
+  background-color: ${(props) => props.theme.black.darker};
   /* 스크롤바 활성화 및 숨기기 */
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -46,7 +46,6 @@ const ModalPoster = styled.div<{ posterpath: string }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Song Myung";
   font-size: 36px;
   font-weight: 800;
   text-align: center;
@@ -67,30 +66,31 @@ const Genrs = styled.div`
     border-radius: 7px;
     padding: 5px;
     margin: 0 5px;
-    background-color: ${(props) => props.theme.white.lighter};
+    background-color: ${(props) => props.theme.black.darker};
   }
 `;
 const ModalPrevInfo = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center; */
   width: 100%;
-  height: 150px;
+  height: 230px;
   padding: 5px 10px;
   text-align: center;
-  font-size: 15px;
+  /* font-size: 15px; */
   margin-bottom: 10px;
   background-color: rgba(0, 0, 0, 0.3);
   span {
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: center; */
     text-align: left;
     margin-right: 10px;
+    color: white;
   }
   #star {
     font-size: 22px;
-    color: ${(props) => props.theme.white.lighter};
+    color: ${(props) => props.theme.red};
     &:first-child {
       margin-right: 3px;
     }
@@ -109,12 +109,13 @@ const ModalNextInfo = styled.div`
   text-align: center;
   font-size: 20px;
   #title {
-    font-size: 28px;
+    font-size: 18px;
     color: grey;
     margin-bottom: 10px;
   }
   #name {
-    margin-bottom: 20px;
+    margin: 10px 20px;
+    color: white;
   }
 `;
 const ModalInfoImg = styled.div<{ posterpath: string }>`
@@ -122,8 +123,8 @@ const ModalInfoImg = styled.div<{ posterpath: string }>`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50px;
   margin: 0 10px;
 `;
@@ -131,7 +132,7 @@ const ModalInfoCast = styled.div`
   display: flex;
   justify-content: center;
   #title {
-    font-size: 28px;
+    font-size: 18px;
     color: grey;
     margin-bottom: 10px;
   }
