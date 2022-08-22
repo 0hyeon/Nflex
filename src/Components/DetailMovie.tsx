@@ -78,8 +78,7 @@ const ModalPrevInfo = styled.div`
   justify-content: flex-start;
   align-items: center; */
   width: 100%;
-  height: 230px;
-  padding: 5px 10px;
+  padding: 25px 10px;
   text-align: center;
   /* font-size: 15px; */
   margin-bottom: 10px;
@@ -192,6 +191,8 @@ function DetailMovie({ kind, id }: IProps) {
   const clickOverlay = () => {
     history.goBack();
   };
+  console.log(detailData);
+
   return (
     <AnimatePresence>
       {creditLoading && detailLoading ? (
@@ -243,6 +244,7 @@ function DetailMovie({ kind, id }: IProps) {
                 </ModalPoster>
                 <ModalPrevInfo>
                   <>
+                    {/* 평점 */}
                     {detailData.vote_average ? (
                       <div style={{ color: "white", marginBottom: 10 }}>
                         <span style={{ fontWeight: "bold" }}>평점</span> :
@@ -254,6 +256,7 @@ function DetailMovie({ kind, id }: IProps) {
                         </span>
                       </div>
                     ) : null}
+                    {/* 줄거리 */}
                     <span
                       style={{
                         fontSize: "14px",
@@ -263,8 +266,12 @@ function DetailMovie({ kind, id }: IProps) {
                       <span style={{ fontSize: "16px", fontWeight: "bold" }}>
                         줄거리
                       </span>{" "}
-                      : {detailData.overview ? detailData.overview : ""}
+                      :{" "}
+                      {detailData.overview
+                        ? detailData.overview
+                        : "줄거리가 없습니다."}
                     </span>
+                    {/* 예고편 */}
                   </>
                 </ModalPrevInfo>
 

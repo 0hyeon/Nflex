@@ -44,6 +44,11 @@ export function getMovies(category: string) {
     `${BASE_PATH}/movie/${category}?api_key=${API_KEY}&language=ko&page=1&region=kr`
   ).then((response) => response.json());
 }
+export function getVideo(id: number) {
+  return fetch(
+    `${BASE_PATH}/movie/${id}/videos?api_key=${API_KEY}&language=ko&page=1&region=kr`
+  ).then((response) => response.json());
+}
 
 export interface IGetMovieDetail {
   id: number;

@@ -74,8 +74,7 @@ const ModalPrevInfo = styled.div`
   justify-content: flex-start;
   align-items: center; */
   width: 100%;
-  height: 230px;
-  padding: 5px 10px;
+  padding: 25px 10px;
   text-align: center;
   /* font-size: 15px; */
   margin-bottom: 10px;
@@ -116,6 +115,7 @@ const ModalNextInfo = styled.div`
   #name {
     margin: 10px 20px;
     color: white;
+    font-size: 14px;
   }
 `;
 const ModalInfoImg = styled.div<{ posterpath: string }>`
@@ -234,38 +234,64 @@ function DetailTv({ id, kind }: IProps) {
                   </Genrs>
                 </ModalPoster>
                 <ModalPrevInfo>
-                  <span id="star">★</span>
-                  <span id="star">
-                    {detailData.vote_average ? detailData.vote_average : "0.0"}
-                  </span>
-                  <span>
+                  {detailData.vote_average ? (
+                    <div style={{ color: "white", marginBottom: 10 }}>
+                      <span style={{ fontWeight: "bold" }}>평점</span> :
+                      <span id="star">★</span>
+                      <span id="star">
+                        {detailData.vote_average
+                          ? detailData.vote_average
+                          : "0.0"}
+                      </span>
+                    </div>
+                  ) : null}
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      lineHeight: "1.3",
+                    }}
+                  >
+                    <span style={{ fontSize: "16px", fontWeight: "bold" }}>
+                      줄거리
+                    </span>{" "}
+                    :{" "}
                     {detailData.overview
                       ? detailData.overview
-                      : "설명이 없습니다"}
+                      : "줄거리가 없습니다."}
                   </span>
                 </ModalPrevInfo>
 
                 <ModalCreditsInfo>
-                  <ModalNextInfo>
-                    <span id="title">Director</span>
-                    <ModalInfoImg
-                      posterpath={getPosterPath(
-                        Directing?.profile_path ? Directing?.profile_path : ""
-                      )}
-                    />
-                    <span id="name">{Directing?.original_name}</span>
-                  </ModalNextInfo>
+                  {Directing?.profile_path ? (
+                    <ModalNextInfo>
+                      {Directing?.profile_path ? (
+                        <span id="title">Director</span>
+                      ) : null}
+                      <ModalInfoImg
+                        posterpath={getPosterPath(
+                          Directing?.profile_path ? Directing?.profile_path : ""
+                        )}
+                      ></ModalInfoImg>
+                      {Directing?.profile_path ? (
+                        <span id="name">{Directing?.original_name}</span>
+                      ) : null}
+                    </ModalNextInfo>
+                  ) : null}
 
                   <ModalInfoCast>
                     {Casting?.map((Cast) => (
                       <ModalNextInfo key={Cast.id}>
-                        <span id="title">Actor</span>
-                        <ModalInfoImg
-                          posterpath={getPosterPath(
-                            Cast?.profile_path ? Cast?.profile_path : ""
-                          )}
-                        />
-                        <span id="name">{Cast?.original_name}</span>
+                        {Cast?.profile_path ? (
+                          <>
+                            <span id="title">Actor</span>
+                            <ModalInfoImg
+                              posterpath={getPosterPath(
+                                Cast?.profile_path ? Cast?.profile_path : ""
+                              )}
+                            />
+                            <span id="name">{Cast?.original_name}</span>
+                          </>
+                        ) : null}
                       </ModalNextInfo>
                     ))}
                   </ModalInfoCast>

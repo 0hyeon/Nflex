@@ -16,6 +16,10 @@ const Nav = styled(motion.nav)`
   padding: 20px 60px;
   color: white;
   z-index: 99;
+  &:hover {
+    background-color: black;
+    color: ${(props) => props.theme.white.lighter};
+  }
 `;
 
 const Col = styled.div`

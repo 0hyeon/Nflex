@@ -1,30 +1,23 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
-// import ReactPlayer from "react-player";
+import ReactPlayer from "react-player";
 import {
   getMovies,
-  // getVideo,
+  getVideo,
   IGetMoviesResult,
-  // IGetVideosResult,
+  IGetVideosResult,
 } from "../api";
 import { makeImagePath } from "../utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import MovieSlider from "../Components/MovieSlider";
 import Loader from "../Components/Loader";
-
+import "../css/iframe.css";
 const Wrapper = styled.div`
   background: black;
   padding-bottom: 200px;
 `;
-
-// const Loader = styled.div`
-//   height: 20vh;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
 
 const Banner = styled.div<{ bgPhoto: string }>`
   height: 75vh;
@@ -43,7 +36,7 @@ const Title = styled.h2`
 `;
 
 const Overview = styled.p`
-  font-size: 20px;
+  font-size: 25px;
   width: 50%;
 `;
 
@@ -187,9 +180,16 @@ const BannerBtn = styled.div`
     color: ${(props) => props.theme.white.lighter};
   }
 `;
+const IframeWrapper = styled.div``;
 const offset = 6;
 
 function Home() {
+  let [alert, alertSet] = useState(true);
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      alertSet(false);
+    }, 2000);
+  });
   const history = useHistory();
   const { scrollY } = useViewportScroll();
   const bigMovieMatch = useRouteMatch<{ movieId: string }>("/movies/:movieId"); //해당 url인지 아닌지판단
@@ -213,9 +213,10 @@ function Home() {
     () => getMovies("upcoming")
   );
 
-  // const { data: videoData, isLoading: videoLoading } =
-  //   useQuery<IGetVideosResult>(["movies", "videos"], () => getVideo(616037));
-  // console.log(videoData);
+  const { data: videoData, isLoading: videoLoading } =
+    useQuery<IGetVideosResult>(["movies", "videos"], () => getVideo(616037));
+  console.log("videoData", videoData);
+
   console.log(nowData);
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -250,29 +251,46 @@ function Home() {
         <Loader />
       ) : (
         <>
-          {/* <ReactPlayer
-            className="player"
-            url={"https://www.youtube.com/watch?v=4_hAjH8hK4U"}
-            width="100vw"
-            heigth="700px"
-            playing={true}
-            muted={true}
-            controls={true}
-            style={{ position: "relative" }}
-          ></ReactPlayer>
-          <Title>{data?.results[0].title}heyy</Title>
-          <Overview>{data?.results[0].overview}</Overview> */}
+          {alert === true ? (
+            <Banner
+              onClick={incraseIndex}
+              bgPhoto={makeImagePath(nowData?.results[0].backdrop_path || "")}
+            >
+              <Title>{nowData?.results[0].title}</Title>
+              <Overview>{nowData?.results[0].overview}</Overview>
+              <BannerBtn
+                onClick={() => moveBanner(nowData?.results[0].id + "")}
+              >
+                자세히 보기
+              </BannerBtn>
+            </Banner>
+          ) : (
+            <ReactPlayer
+              className="player"
+              url={"https://www.youtube.com/watch?v=tTAEQG3K-yU"}
+              width="100vw"
+              playing={true}
+              muted={true}
+              loop={true}
+              controls={false}
+              style={
+                {
+                  // position: "absolute",
+                  // right: 150,
+                  // backgroundColor: "transparent",
+                }
+              }
+            >
+              <Title>{nowData?.results[0].title}</Title>
+              <Overview>{nowData?.results[0].overview}</Overview>
+              <BannerBtn
+                onClick={() => moveBanner(nowData?.results[0].id + "")}
+              >
+                자세히 보기
+              </BannerBtn>
+            </ReactPlayer>
+          )}
 
-          <Banner
-            onClick={incraseIndex}
-            bgPhoto={makeImagePath(nowData?.results[0].backdrop_path || "")}
-          >
-            <Title>{nowData?.results[0].title}</Title>
-            <Overview>{nowData?.results[0].overview}</Overview>
-            <BannerBtn onClick={() => moveBanner(nowData?.results[0].id + "")}>
-              자세히 보기
-            </BannerBtn>
-          </Banner>
           <MovieSlider kind="upcoming" data={upData} />
           <MovieSlider kind="now" data={nowData} />
           <MovieSlider kind="toprated" data={topData} />

@@ -10,7 +10,7 @@ import DetailTv from "./DetailTv";
 
 const Slider = styled.div`
   position: relative;
-  height: 50vh;
+  height: 30vh;
 `;
 const SliderTitle = styled.h2`
   margin-bottom: 20px;
@@ -280,7 +280,9 @@ function TvSlider({ kind, data }: IProps) {
                     <span id="vote">
                       ★ {tv.vote_average ? tv.vote_average : "정보없음"}
                     </span>
-                    <span>개봉일: {tv.first_air_date}</span>
+                    <span style={{ color: "white" }}>
+                      개봉일: {tv.first_air_date}
+                    </span>
                   </BoxBottom>
                 </Box>
               ))}

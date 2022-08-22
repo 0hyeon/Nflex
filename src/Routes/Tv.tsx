@@ -35,7 +35,7 @@ const BannerTitle = styled.h2`
 `;
 
 const BannerOverview = styled.p`
-  font-size: 20px;
+  font-size: 25px;
   width: 50%;
 `;
 const BannerBtn = styled.div`
@@ -75,7 +75,7 @@ function Tv() {
   // 배너 API (우영우)
   const { data: bannerData, isLoading: bannerLoading } = useQuery<IGetTvDetail>(
     ["tv", "banner"],
-    () => getTvDetail(String(197067))
+    () => getTvDetail(String(popularData?.results[0].id))
   );
 
   const history = useHistory();
@@ -83,7 +83,6 @@ function Tv() {
   const moveBanner = (id: string) => {
     history.push(`/tv/${id}`);
   };
-  console.log(bannerData);
   // 불필요한 API 호출을 막음
   useEffect(() => {}, []);
 

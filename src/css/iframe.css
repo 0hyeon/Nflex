@@ -1,0 +1,16 @@
+iframe {
+  width: 100vw;
+  height: 75vh;
+  translate: translate(-50%, -50%);
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.player {
+  height: 75vh !important;
+}
+.ytp-watermark yt-uix-sessionlink {
+}
+.ytp-hide-controls:not(.ytp-mweb-player) .ytp-watermark {
+}
