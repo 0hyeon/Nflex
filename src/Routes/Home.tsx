@@ -188,7 +188,7 @@ function Home() {
   useEffect(() => {
     let timer = setTimeout(() => {
       alertSet(false);
-    }, 2000);
+    }, 4000);
   });
   const history = useHistory();
   const { scrollY } = useViewportScroll();
